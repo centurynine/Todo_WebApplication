@@ -7,7 +7,7 @@ import 'home.dart';
 import 'storage/todo_storage.dart';
 
 class TodoEdit extends StatefulWidget {
-  final Todo todo; // รับ Todo ผ่านคอนสตรักเตอร์
+  final Todo todo;
 
   const TodoEdit({super.key, required this.todo});
 

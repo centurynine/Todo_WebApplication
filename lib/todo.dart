@@ -30,6 +30,7 @@ class _TodoItemState extends State<TodoItem> {
   void getDate() {
     SharedPreferences.getInstance().then((prefs) {
       List<String>? encodedList = prefs.getStringList('todo');
+      print(encodedList);
       if (encodedList != null) {
         List decodedList = encodedList.map((e) => json.decode(e)).toList();
         setState(() {
@@ -90,7 +91,7 @@ class _TodoItemState extends State<TodoItem> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                        'Start date: ${todoList[index].startDate}',
+                                        'Start date: ${todoList[index].startDate.toString().substring(0, 10)} Time: ${todoList[index].startDate.toString().substring(11, 16)}',
                                         style: const TextStyle(
                                             color: Colors.white)),
                                   )),
@@ -106,7 +107,7 @@ class _TodoItemState extends State<TodoItem> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                        'End date: ${todoList[index].endDate}',
+                                        'End date: ${todoList[index].endDate.toString().substring(0,10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
                                         style: const TextStyle(
                                             color: Colors.white)),
                                   )),
