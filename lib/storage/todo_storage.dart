@@ -14,7 +14,6 @@ class Todo {
     required this.endDate,
     this.check = false,
   });
- 
 
   Todo.fromMap(Map map)
       : id = map['id'],

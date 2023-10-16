@@ -14,9 +14,7 @@ class TodoItem extends StatefulWidget {
 }
 
 class _TodoItemState extends State<TodoItem> {
-  List<Todo> todoList = [
-   
-  ];
+  List<Todo> todoList = [];
 
   @override
   void initState() {
@@ -29,27 +27,24 @@ class _TodoItemState extends State<TodoItem> {
     getDate();
   }
 
- 
-
   void getDate() {
     SharedPreferences.getInstance().then((prefs) {
       List<String>? encodedList = prefs.getStringList('todo');
       if (encodedList != null) {
-        List decodedList =
-            encodedList.map((e) => json.decode(e)).toList();
+        List decodedList = encodedList.map((e) => json.decode(e)).toList();
         setState(() {
           todoList = decodedList.map((e) => Todo.fromMap(e)).toList();
         });
       }
     });
- 
   }
 
   Future saveData() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<String> encodedList = todoList.map((e) => json.encode(e.toMap())).toList();
-  prefs.setStringList('todo', encodedList);
-}
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> encodedList =
+        todoList.map((e) => json.encode(e.toMap())).toList();
+    prefs.setStringList('todo', encodedList);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,21 +68,31 @@ class _TodoItemState extends State<TodoItem> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                       child: ListTile(
-                        title: Text(todoList[index].name),
+                        title: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(todoList[index].name,
+                                style: const TextStyle(fontSize: 20)
+                            ), 
+                            Text(todoList[index].description),
+                          ],
+                        ),
                         subtitle: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child: Row(
                             children: [
+                              
                               Container(
                                   decoration: BoxDecoration(
                                     color: const Color.fromARGB(
                                         255, 152, 152, 152),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child:Padding(
+                                  child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text('Start date: ${todoList[index].startDate}',
-                                        style: const TextStyle(color: Colors.white)),
+                                    child: Text(
+                                        'Start date: ${todoList[index].startDate}',
+                                        style: const TextStyle(
+                                            color: Colors.white)),
                                   )),
                               const SizedBox(
                                 width: 10,
@@ -100,29 +105,73 @@ class _TodoItemState extends State<TodoItem> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text('End date: ${todoList[index].endDate}',
-                                        style: const TextStyle(color: Colors.white)),
+                                    child: Text(
+                                        'End date: ${todoList[index].endDate}',
+                                        style: const TextStyle(
+                                            color: Colors.white)),
                                   )),
                             ],
                           ),
                         ),
-                        leading: Checkbox(
-                          value: todoList[index].check,
-                          onChanged: (bool? value) async {
-                            setState(() {
-                              todoList[index].check = value ?? false;
-                            });
+                        leading: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          child: Checkbox(
+                            value: todoList[index].check,
+                            onChanged: (bool? value) async {
+                              setState(() {
+                                todoList[index].check = value ?? false;
+                              });
                               await saveData();
-                          },
+                            },
+                          ),
                         ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.edit_note_rounded),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TodoEdit( todo: todoList[index])));
-                          },
+                        trailing: Container(
+                          width: 90,
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove_circle_rounded),
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Delete todo'),
+                                          content: const Text(
+                                              'Are you sure you want to delete this todo?'),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text('Cancel')),
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  setState(() {
+                                                    todoList.removeAt(index);
+                                                  });
+                                                  saveData();
+                                                },
+                                                child: const Text('Delete')),
+                                          ],
+                                        );
+                                      });
+                                 
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.edit_note_rounded),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TodoEdit(todo: todoList[index])));
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -132,6 +181,7 @@ class _TodoItemState extends State<TodoItem> {
             );
           });
   }
-}
+
  
 
+}
