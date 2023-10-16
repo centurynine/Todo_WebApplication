@@ -15,21 +15,20 @@ class TodoEdit extends StatefulWidget {
   State<TodoEdit> createState() => _TodoEditState(todo: todo);
 }
 
-String name = '';
-String description = '';
-String startDate = '';
-String endDate = '';
-String startTime = '';
-String endTime = '';
-DateTime endTimeWidget = DateTime.now();
-DateTime startTimeWidget = DateTime.now();
-bool check = false;
-
 class _TodoEditState extends State<TodoEdit> {
   Todo todo;
   _TodoEditState({required this.todo});
   @override
   List<Todo> todoList = [];
+  String name = '';
+  String description = '';
+  String startDate = '';
+  String endDate = '';
+  String startTime = '';
+  String endTime = '';
+  DateTime endTimeWidget = DateTime.now();
+  DateTime startTimeWidget = DateTime.now();
+  bool check = false;
 
   @override
   void initState() {
@@ -210,12 +209,13 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('Start date'),
     );
   }
@@ -235,12 +235,13 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('End date'),
     );
   }
@@ -263,12 +264,13 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('Start time'),
     );
   }
@@ -296,12 +298,13 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('End time'),
     );
   }
@@ -375,60 +378,60 @@ class _TodoEditState extends State<TodoEdit> {
             },
           );
         }
-      },style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('Save'),
     );
   }
-}
 
-TextFormField nameField() {
-  return TextFormField(
-    initialValue: name,
-    onChanged: (value) {
-      name = value.trim();
-    },
-    validator: (value) {
-      if (value!.isEmpty) {
-        return 'Please enter name';
-      }
-      return null;
-    },
-    keyboardType: TextInputType.text,
-    textInputAction: TextInputAction.next,
-    decoration: const InputDecoration(
-      border: InputBorder.none,
-      labelText: 'Name',
-      prefixIcon: Icon(Icons.tornado_rounded),
-      hintText: 'Name',
-    ),
-  );
-}
+  TextFormField nameField() {
+    return TextFormField(
+      initialValue: name,
+      onChanged: (value) {
+        name = value.trim();
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter name';
+        }
+        return null;
+      },
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.next,
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        labelText: 'Name',
+        prefixIcon: Icon(Icons.tornado_rounded),
+        hintText: 'Name',
+      ),
+    );
+  }
 
-TextFormField descriptionField() {
-  return TextFormField(
-
-    initialValue: description,
-    onChanged: (value) {
-      description = value.trim();
-    },
-    validator: (value) {
-      if (value!.isEmpty) {
-        return 'Please enter description';
-      }
-      return null;
-    },
-    maxLines: 5,
-    keyboardType: TextInputType.multiline,
-    decoration: const InputDecoration(
-      border: InputBorder.none,
-      labelText: 'Description',
-      prefixIcon: Icon(Icons.tornado_rounded),
-      hintText: 'Description',
-    ),
-  );
+  TextFormField descriptionField() {
+    return TextFormField(
+      initialValue: description,
+      onChanged: (value) {
+        description = value.trim();
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter description';
+        }
+        return null;
+      },
+      maxLines: 5,
+      keyboardType: TextInputType.multiline,
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        labelText: 'Description',
+        prefixIcon: Icon(Icons.tornado_rounded),
+        hintText: 'Description',
+      ),
+    );
+  }
 }

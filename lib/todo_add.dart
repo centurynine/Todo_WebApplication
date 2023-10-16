@@ -12,29 +12,23 @@ class TodoAdd extends StatefulWidget {
   State<TodoAdd> createState() => _TodoAddState();
 }
 
-String name = '';
-String description = '';
-String startTime = '';
-String endTime = '';
-String startDate = '';
-String endDate = '';
-
 class _TodoAddState extends State<TodoAdd> {
   TimeOfDay time = TimeOfDay.now();
   @override
   List<Todo> todoList = [];
+  String name = '';
+  String description = '';
+  String startTime = '';
+  String endTime = '';
+  String startDate = '';
+  String endDate = '';
 
   @override
   void initState() {
-    initSharedPreferences();
+    getDate();
     super.initState();
   }
-
-  void initSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    getDate();
-  }
-
+ 
   void getDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? encodedList = prefs.getStringList('todo');
@@ -105,8 +99,7 @@ class _TodoAddState extends State<TodoAdd> {
               Container(
                 child: startDate == ''
                     ? const Text('#Date')
-                    :
-                Text(startDate.toString().substring(0,10)),
+                    : Text(startDate.toString().substring(0, 10)),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -139,10 +132,9 @@ class _TodoAddState extends State<TodoAdd> {
                 ),
               ),
               Container(
-                child: endDate == ''
-                    ? const Text('#Date')
-                    : Text(endDate.toString().substring(0,10))
-              ),
+                  child: endDate == ''
+                      ? const Text('#Date')
+                      : Text(endDate.toString().substring(0, 10))),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -153,7 +145,7 @@ class _TodoAddState extends State<TodoAdd> {
                   child: endTimePick(),
                 ),
               ),
-                            Container(
+              Container(
                 child: endTime == ''
                     ? const Text('#Time')
                     : Text(endTime.toString()),
@@ -192,12 +184,13 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-      },    style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('Start date'),
     );
   }
@@ -217,12 +210,13 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-      },    style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('End date'),
     );
   }
@@ -240,42 +234,42 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-      },    style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('Start time'),
     );
   }
 
-ElevatedButton endTimePick() {
-  return ElevatedButton(
-    onPressed: () {
-      showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-      ).then((value) {
-        if (value != null) {
-          setState(() {
-            endTime = value.format(context);
-          });
-        }
-      });
-    },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+  ElevatedButton endTimePick() {
+    return ElevatedButton(
+      onPressed: () {
+        showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.now(),
+        ).then((value) {
+          if (value != null) {
+            setState(() {
+              endTime = value.format(context);
+            });
+          }
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
-    child: const Text(
-      'End time',
-    ),
-  );
-}
-
+      child: const Text(
+        'End time',
+      ),
+    );
+  }
 
   ElevatedButton saveDate() {
     return ElevatedButton(
@@ -346,57 +340,58 @@ ElevatedButton endTimePick() {
             },
           );
         }
-      },    style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), //  
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), //
+        ),
       ),
-    ),
       child: const Text('Save'),
     );
   }
-}
 
-TextFormField nameField() {
-  return TextFormField(
-    onChanged: (value) {
-      name = value.trim();
-    },
-    validator: (value) {
-      if (value!.isEmpty) {
-        return 'Please enter name';
-      }
-      return null;
-    },
-    keyboardType: TextInputType.text,
-    textInputAction: TextInputAction.next,
-    decoration: const InputDecoration(
-      border: InputBorder.none,
-      labelText: 'Name',
-      prefixIcon: Icon(Icons.tornado_rounded),
-      hintText: 'Name',
-    ),
-  );
-}
+  TextFormField nameField() {
+    return TextFormField(
+      onChanged: (value) {
+        name = value.trim();
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter name';
+        }
+        return null;
+      },
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.next,
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        labelText: 'Name',
+        prefixIcon: Icon(Icons.tornado_rounded),
+        hintText: 'Name',
+      ),
+    );
+  }
 
-TextFormField descriptionField() {
-  return TextFormField(
-    onChanged: (value) {
-      description = value.trim();
-    },
-    validator: (value) {
-      if (value!.isEmpty) {
-        return 'Please enter description';
-      }
-      return null;
-    },
-    maxLines: 5,
-    keyboardType: TextInputType.multiline,
-    decoration: const InputDecoration(
-      border: InputBorder.none,
-      labelText: 'Description',
-      prefixIcon: Icon(Icons.tornado_rounded),
-      hintText: 'Description',
-    ),
-  );
+  TextFormField descriptionField() {
+    return TextFormField(
+      onChanged: (value) {
+        description = value.trim();
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter description';
+        }
+        return null;
+      },
+      maxLines: 5,
+      keyboardType: TextInputType.multiline,
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        labelText: 'Description',
+        prefixIcon: Icon(Icons.tornado_rounded),
+        hintText: 'Description',
+      ),
+    );
+  }
 }
