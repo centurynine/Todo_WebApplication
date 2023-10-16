@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Todo {
   int id;
   String name;
@@ -6,18 +10,17 @@ class Todo {
   DateTime endDate;
   bool check;
 
-  Todo(
-      {
-      required this.id,
-      required this.name,
-      required this.description,
-      required this.startDate,
-      required this.endDate,
-      this.check = false,
-      });
+  Todo({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.startDate,
+    required this.endDate,
+    this.check = false,
+  });
 
-      Todo.fromMap(Map map) :
-        id = map['id'],
+  Todo.fromMap(Map map)
+      : id = map['id'],
         name = map['name'],
         description = map['description'],
         startDate = DateTime.parse(map['startDate']),
@@ -34,7 +37,5 @@ class Todo {
       'check': check,
     };
   }
-
-  
 
 }
