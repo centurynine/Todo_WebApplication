@@ -21,27 +21,34 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              Expanded(
-                child: ListView(children: [
+              Row(
+                children: [
                   Container(
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: Row(
                       children: [
-                        Text('Todo List'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Add'),
-                        ),
+                        Text('Todo List',
+                            style: TextStyle(
+                              fontSize: 30,
+                            )),
+                        IconButton(
+                          icon: const Icon(Icons.add_box_rounded),
+                          onPressed: () {
+                         
+                          },)
                       ],
                     ),
-                    ),
-               
+                  ),
+                ],
+              ),
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
                   TodoItem(),
                 ]),
               )
