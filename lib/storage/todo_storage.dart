@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
 class Todo {
   int id;
   String name;
@@ -18,6 +14,7 @@ class Todo {
     required this.endDate,
     this.check = false,
   });
+ 
 
   Todo.fromMap(Map map)
       : id = map['id'],

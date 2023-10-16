@@ -43,6 +43,12 @@ class _TodoItemState extends State<TodoItem> {
  
   }
 
+  Future saveData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String> encodedList = todoList.map((e) => json.encode(e.toMap())).toList();
+  prefs.setStringList('todo', encodedList);
+}
+
   @override
   Widget build(BuildContext context) {
     return todoList.isEmpty
@@ -59,7 +65,7 @@ class _TodoItemState extends State<TodoItem> {
                   return Container(
                     margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -77,9 +83,9 @@ class _TodoItemState extends State<TodoItem> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child:Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text('Start date: ${todoList[index].startDate}',
-                                        style: TextStyle(color: Colors.white)),
+                                        style: const TextStyle(color: Colors.white)),
                                   )),
                               const SizedBox(
                                 width: 10,
@@ -91,16 +97,21 @@ class _TodoItemState extends State<TodoItem> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text('End date: ${todoList[index].endDate}',
-                                        style: TextStyle(color: Colors.white)),
+                                        style: const TextStyle(color: Colors.white)),
                                   )),
                             ],
                           ),
                         ),
                         leading: Checkbox(
-                          value: false,
-                          onChanged: (bool? value) {},
+                          value: todoList[index].check,
+                          onChanged: (bool? value) async {
+                            setState(() {
+                              todoList[index].check = value ?? false;
+                            });
+                              await saveData();
+                          },
                         ),
                         trailing: IconButton(
                           icon: const Icon(Icons.edit_note_rounded),

@@ -54,9 +54,10 @@ class _TodoAddState extends State<TodoAdd> {
     prefs.setStringList('todo', encodedList);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(179, 167, 167, 167),
+      backgroundColor: const Color.fromARGB(179, 167, 167, 167),
       appBar: AppBar(
           title: const Text('Todo add'),
           backgroundColor: Colors.blueGrey[900],
@@ -73,7 +74,7 @@ class _TodoAddState extends State<TodoAdd> {
             padding: const EdgeInsets.fromLTRB(300, 10, 300, 10),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: nameField(),
@@ -83,7 +84,7 @@ class _TodoAddState extends State<TodoAdd> {
             padding: const EdgeInsets.fromLTRB(300, 10, 300, 10),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: descriptionField(),
@@ -96,7 +97,7 @@ class _TodoAddState extends State<TodoAdd> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: startDatePick(),
@@ -106,7 +107,7 @@ class _TodoAddState extends State<TodoAdd> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: startTimePick(),
@@ -121,7 +122,7 @@ class _TodoAddState extends State<TodoAdd> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: endDatePick(),
@@ -131,7 +132,7 @@ class _TodoAddState extends State<TodoAdd> {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: endTimePick(),
@@ -143,7 +144,7 @@ class _TodoAddState extends State<TodoAdd> {
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: saveDate(),
@@ -234,28 +235,66 @@ class _TodoAddState extends State<TodoAdd> {
     );
   }
 
-ElevatedButton saveDate() {
-  return ElevatedButton(
-    onPressed: () {
-      if (name.isNotEmpty && description.isNotEmpty && startDate.isNotEmpty && endDate.isNotEmpty && startTime.isNotEmpty && endTime.isNotEmpty) {
-        DateTime startDateTime = DateTime.parse(startDate).add(Duration(
-          hours: int.parse(startTime.split(":")[0]),
-          minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
-        ));
-        DateTime endDateTime = DateTime.parse(endDate).add(Duration(
-          hours: int.parse(endTime.split(":")[0]),
-          minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
-        ));
-        if (endDateTime.isBefore(startDateTime)) {
+  ElevatedButton saveDate() {
+    return ElevatedButton(
+      onPressed: () {
+        if (name.isNotEmpty &&
+            description.isNotEmpty &&
+            startDate.isNotEmpty &&
+            endDate.isNotEmpty &&
+            startTime.isNotEmpty &&
+            endTime.isNotEmpty) {
+          DateTime startDateTime = DateTime.parse(startDate).add(Duration(
+            hours: int.parse(startTime.split(":")[0]),
+            minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
+          ));
+          DateTime endDateTime = DateTime.parse(endDate).add(Duration(
+            hours: int.parse(endTime.split(":")[0]),
+            minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
+          ));
+          if (endDateTime.isBefore(startDateTime)) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text("Error"),
+                  content: const Text("End time cannot be before start time"),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: const Text("OK"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          } else {
+            Todo todo = Todo(
+              id: todoList.length + 1,
+              name: name,
+              description: description,
+              startDate: startDateTime,
+              endDate: endDateTime,
+            );
+            todoList.add(todo);
+            saveData();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Home()),
+            );
+          }
+        } else {
           showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text("Error"),
-                content: Text("End time cannot be before start time"),
+                title: const Text("Error"),
+                content: const Text("Please fill in all fields"),
                 actions: <Widget>[
                   ElevatedButton(
-                    child: Text("OK"),
+                    child: const Text("OK"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -264,43 +303,11 @@ ElevatedButton saveDate() {
               );
             },
           );
-        } else {
-          Todo todo = Todo(
-            id: todoList.length + 1,
-            name: name,
-            description: description,
-            startDate: startDateTime,
-            endDate: endDateTime,
-          );
-          todoList.add(todo);
-          saveData();
-          Navigator.pop(context);
         }
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Error"),
-              content: Text("Please fill in all fields"),
-              actions: <Widget>[
-                ElevatedButton(
-                  child: Text("OK"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    },
-    child: const Text('Save'),
-  );
-}
-
-
+      },
+      child: const Text('Save'),
+    );
+  }
 }
 
 TextFormField nameField() {
