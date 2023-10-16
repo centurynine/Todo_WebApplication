@@ -89,8 +89,28 @@ class _TodoItemState extends State<TodoItem> {
                                       ),
                                     ],
                                   )
-                                : Text(todoList[index].name,
-                                    style: const TextStyle(fontSize: 20)),
+                                : todoList[index].endDate.isAfter(DateTime.now()) 
+                                ? Text(todoList[index].name,
+                                    style: const TextStyle(fontSize: 20))
+                                    : Row(
+                                    children: [
+                                      Text(todoList[index].name,
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              decoration:
+                                                  TextDecoration.lineThrough)),
+                                      const Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                        child: Text(
+                                          'Expired',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.red),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                             Text(todoList[index].description),
                           ],
                         ),

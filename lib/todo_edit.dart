@@ -77,7 +77,7 @@ class _TodoEditState extends State<TodoEdit> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(179, 167, 167, 167),
       appBar: AppBar(
-          title: const Text('Todo add'),
+          title: const Text('Todo edit'),
           backgroundColor: Colors.blueGrey[900],
           leading: IconButton(
             iconSize: 50,
