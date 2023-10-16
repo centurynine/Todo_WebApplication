@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/todo.dart';
+import 'package:todo_application/todo_add.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +18,8 @@ class _HomeState extends State<Home> {
           title: const Text('Todo application'),
           backgroundColor: Colors.blueGrey[900],
         ),
+        
+        
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -38,7 +41,11 @@ class _HomeState extends State<Home> {
                         IconButton(
                           icon: const Icon(Icons.add_box_rounded),
                           onPressed: () {
-                         
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TodoAdd()));
+                        
                           },)
                       ],
                     ),

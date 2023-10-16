@@ -13,27 +13,7 @@ class TodoItem extends StatefulWidget {
 
 class _TodoItemState extends State<TodoItem> {
   List<Todo> todoList = [
-    Todo(
-        id: 1,
-        name: 'Todo item 1',
-        description: 'Todo item 1 description',
-        startDate: DateTime.now(),
-        endDate: DateTime.now(),
-        check: false),
-    Todo(
-        id: 2,
-        name: 'Todo item 2',
-        description: 'Todo item 2 description',
-        startDate: DateTime.now(),
-        endDate: DateTime.now(),
-        check: false),
-    Todo(
-        id: 3,
-        name: 'Todo item 3',
-        description: 'Todo item 3 description',
-        startDate: DateTime.now(),
-        endDate: DateTime.now(),
-        check: false),
+   
   ];
 
   @override
@@ -47,13 +27,7 @@ class _TodoItemState extends State<TodoItem> {
     getDate();
   }
 
-  void saveData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> encodedList =
-        todoList.map((e) => json.encode(e.toMap())).toList();
-    prefs.setStringList('todo', encodedList);
-    print('Data saved');
-  }
+ 
 
   void getDate() {
     SharedPreferences.getInstance().then((prefs) {
@@ -141,3 +115,5 @@ class _TodoItemState extends State<TodoItem> {
           });
   }
 }
+ 
+
