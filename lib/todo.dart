@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_application/storage/todo_storage.dart';
 
-class TodoItem extends StatelessWidget {
+class TodoItem extends StatefulWidget {
   const TodoItem({super.key});
 
   @override
+  State<TodoItem> createState() => _TodoItemState();
+}
+
+class _TodoItemState extends State<TodoItem> {
+  List<Todo> todoList = [];
+  
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return todoList.isEmpty
+        ? const Center(
+            child: Text('No todo items'),
+          )
+        : Container(
       margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
