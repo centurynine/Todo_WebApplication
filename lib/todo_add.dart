@@ -102,6 +102,12 @@ class _TodoAddState extends State<TodoAdd> {
                   child: startDatePick(),
                 ),
               ),
+              Container(
+                child: startDate == ''
+                    ? const Text('#Date')
+                    :
+                Text(startDate.toString().substring(0,10)),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -111,6 +117,11 @@ class _TodoAddState extends State<TodoAdd> {
                   ),
                   child: startTimePick(),
                 ),
+              ),
+              Container(
+                child: startTime == ''
+                    ? const Text('#Time')
+                    : Text(startTime.toString()),
               ),
             ],
           ),
@@ -127,6 +138,11 @@ class _TodoAddState extends State<TodoAdd> {
                   child: endDatePick(),
                 ),
               ),
+              Container(
+                child: endDate == ''
+                    ? const Text('#Date')
+                    : Text(endDate.toString().substring(0,10))
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -136,6 +152,11 @@ class _TodoAddState extends State<TodoAdd> {
                   ),
                   child: endTimePick(),
                 ),
+              ),
+                            Container(
+                child: endTime == ''
+                    ? const Text('#Time')
+                    : Text(endTime.toString()),
               ),
             ],
           ),
@@ -316,7 +337,7 @@ TextFormField nameField() {
       }
       return null;
     },
-    keyboardType: TextInputType.emailAddress,
+    keyboardType: TextInputType.text,
     textInputAction: TextInputAction.next,
     decoration: const InputDecoration(
       border: InputBorder.none,
@@ -339,8 +360,7 @@ TextFormField descriptionField() {
       return null;
     },
     maxLines: 5,
-    keyboardType: TextInputType.emailAddress,
-    textInputAction: TextInputAction.next,
+    keyboardType: TextInputType.multiline,
     decoration: const InputDecoration(
       border: InputBorder.none,
       labelText: 'Description',

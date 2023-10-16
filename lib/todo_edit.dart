@@ -121,6 +121,11 @@ class _TodoEditState extends State<TodoEdit> {
                   child: startDatePick(),
                 ),
               ),
+              Container(
+                child: startDate.isNotEmpty
+                    ? Text(startDate.substring(0, 10))
+                    : const Text(''),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -130,6 +135,11 @@ class _TodoEditState extends State<TodoEdit> {
                   ),
                   child: startTimePick(),
                 ),
+              ),
+              Container(
+                child: startTime.isNotEmpty
+                    ? Text(startTime.substring(0, 5))
+                    : const Text(''),
               ),
             ],
           ),
@@ -146,6 +156,11 @@ class _TodoEditState extends State<TodoEdit> {
                   child: endDatePick(),
                 ),
               ),
+              Container(
+                child: endDate.isNotEmpty
+                    ? Text(endDate.substring(0, 10))
+                    : const Text(''),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -155,6 +170,11 @@ class _TodoEditState extends State<TodoEdit> {
                   ),
                   child: endTimePick(),
                 ),
+              ),
+              Container(
+                child: endTime.isNotEmpty
+                    ? Text(endTime.substring(0, 5))
+                    : const Text(''),
               ),
             ],
           ),
@@ -351,7 +371,7 @@ TextFormField nameField() {
       }
       return null;
     },
-    keyboardType: TextInputType.emailAddress,
+    keyboardType: TextInputType.text,
     textInputAction: TextInputAction.next,
     decoration: const InputDecoration(
       border: InputBorder.none,
@@ -364,6 +384,7 @@ TextFormField nameField() {
 
 TextFormField descriptionField() {
   return TextFormField(
+
     initialValue: description,
     onChanged: (value) {
       description = value.trim();
@@ -375,8 +396,7 @@ TextFormField descriptionField() {
       return null;
     },
     maxLines: 5,
-    keyboardType: TextInputType.emailAddress,
-    textInputAction: TextInputAction.next,
+    keyboardType: TextInputType.multiline,
     decoration: const InputDecoration(
       border: InputBorder.none,
       labelText: 'Description',

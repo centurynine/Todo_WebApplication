@@ -15,10 +15,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(179, 167, 167, 167),
         appBar: AppBar(
-          title: const Text('Todo application'),
+          title: const Text('Todo Application'),
           backgroundColor: Colors.blueGrey[900],
         ),
-        
         
         body: Container(
           padding: const EdgeInsets.all(10),
