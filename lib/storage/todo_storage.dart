@@ -1,4 +1,5 @@
 class Todo {
+  int id;
   String name;
   String description;
   DateTime startDate;
@@ -6,7 +7,9 @@ class Todo {
   bool check;
 
   Todo(
-      {required this.name,
+      {
+      required this.id,
+      required this.name,
       required this.description,
       required this.startDate,
       required this.endDate,
@@ -14,6 +17,7 @@ class Todo {
       });
 
       Todo.fromMap(Map map) :
+        id = map['id'],
         name = map['name'],
         description = map['description'],
         startDate = DateTime.parse(map['startDate']),
@@ -22,6 +26,7 @@ class Todo {
 
   Map toMap() {
     return {
+      'id': id,
       'name': name,
       'description': description,
       'startDate': startDate.toString(),
@@ -29,5 +34,5 @@ class Todo {
       'check': check,
     };
   }
-  
+
 }
