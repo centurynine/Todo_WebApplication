@@ -41,13 +41,13 @@ class _TodoEditState extends State<TodoEdit> {
       startTime = todo.startDate.toString().substring(11, 16);
       endTime = todo.endDate.toString().substring(11, 16);
       startTimeWidget = DateTime.parse(startDate).add(Duration(
-            hours: int.parse(startTime.split(":")[0]),
-            minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
-          ));
-          endTimeWidget = DateTime.parse(endDate).add(Duration(
-            hours: int.parse(endTime.split(":")[0]),
-            minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
-          ));
+        hours: int.parse(startTime.split(":")[0]),
+        minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
+      ));
+      endTimeWidget = DateTime.parse(endDate).add(Duration(
+        hours: int.parse(endTime.split(":")[0]),
+        minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
+      ));
       check = todo.check;
     });
 
@@ -185,7 +185,7 @@ class _TodoEditState extends State<TodoEdit> {
       onPressed: () {
         showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
+          initialDate: startTimeWidget,
           firstDate: DateTime(2023),
           lastDate: DateTime(2025),
         ).then((value) {
@@ -206,7 +206,7 @@ class _TodoEditState extends State<TodoEdit> {
       onPressed: () {
         showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
+          initialDate: endTimeWidget,
           firstDate: DateTime(2023),
           lastDate: DateTime(2025),
         ).then((value) {
@@ -227,7 +227,12 @@ class _TodoEditState extends State<TodoEdit> {
       onPressed: () {
         showTimePicker(
           context: context,
-          initialTime: TimeOfDay.now(),
+          initialTime: startTimeWidget.hour < 12
+              ? TimeOfDay(
+                  hour: startTimeWidget.hour, minute: startTimeWidget.minute)
+              : TimeOfDay(
+                  hour: startTimeWidget.hour - 12,
+                  minute: startTimeWidget.minute),
         ).then((value) {
           if (value != null) {
             setState(() {
@@ -245,9 +250,19 @@ class _TodoEditState extends State<TodoEdit> {
     return ElevatedButton(
       onPressed: () {
         showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.now(),
-        ).then((value) {
+                context: context,
+                initialTime: startTimeWidget == endTimeWidget
+                    ? TimeOfDay(
+                        hour: startTimeWidget.hour + 1,
+                        minute: startTimeWidget.minute)
+                    : endTimeWidget.hour < 12
+                        ? TimeOfDay(
+                            hour: endTimeWidget.hour,
+                            minute: endTimeWidget.minute)
+                        : TimeOfDay(
+                            hour: endTimeWidget.hour - 12,
+                            minute: endTimeWidget.minute))
+            .then((value) {
           if (value != null) {
             setState(() {
               endTime = value.format(context);
@@ -296,14 +311,14 @@ class _TodoEditState extends State<TodoEdit> {
               },
             );
           } else {
-            Todo todo = Todo(
-              id: todoList.length + 1,
-              name: name,
-              description: description,
-              startDate: startDateTime,
-              endDate: endDateTime,
-            );
-            todoList.add(todo);
+            int todoIndex = todoList.indexWhere((item) => item.id == todo.id);
+            if (todoIndex != -1) {
+              todoList[todoIndex].name = name;
+              todoList[todoIndex].description = description;
+              todoList[todoIndex].startDate = startDateTime;
+              todoList[todoIndex].endDate = endDateTime;
+              todoList[todoIndex].check = check;
+            }
             saveData();
             Navigator.pushReplacement(
               context,
