@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:todo_application/todo.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,36 +12,41 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey[500],
+        backgroundColor: Color.fromARGB(179, 167, 167, 167),
         appBar: AppBar(
           title: const Text('Todo application'),
           backgroundColor: Colors.blueGrey[900],
         ),
-        body: Column(
-          children: [
-            
-            Container(
-              height: 500,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: Card(
-                      child: ListTile(
-                        title: const Text('Todo 1'),
-                        subtitle: const Text('Description 1'),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {},
-                        ),
-                      ),
+        body: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    child: Row(
+                      children: [
+                        Text('Todo List'),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Add'),
+                        ),
+                      ],
+                    ),
+                    ),
+               
+                  TodoItem(),
+                ]),
+              )
+            ],
+          ),
         ));
   }
 }
