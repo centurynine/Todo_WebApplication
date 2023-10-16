@@ -51,20 +51,13 @@ class _TodoEditState extends State<TodoEdit> {
       check = todo.check;
     });
 
-    print(name);
-    initSharedPreferences();
-    super.initState();
-  }
-
-  void initSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     getDate();
+    super.initState();
   }
 
   void getDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? encodedList = prefs.getStringList('todo');
-    print(encodedList);
     if (encodedList != null) {
       List decodedList = encodedList.map((e) => json.decode(e)).toList();
       setState(() {
@@ -195,7 +188,6 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-        print(startDate);
       },
       child: const Text('Start date'),
     );
@@ -214,7 +206,6 @@ class _TodoEditState extends State<TodoEdit> {
             setState(() {
               endDate = value.toString();
             });
-            print(endDate);
           }
         });
       },
@@ -239,7 +230,6 @@ class _TodoEditState extends State<TodoEdit> {
               startTime = value.format(context);
             });
           }
-          print(startTime);
         });
       },
       child: const Text('Start time'),
@@ -267,7 +257,6 @@ class _TodoEditState extends State<TodoEdit> {
             setState(() {
               endTime = value.format(context);
             });
-            print(endTime);
           }
         });
       },

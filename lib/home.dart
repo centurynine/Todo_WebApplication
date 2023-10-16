@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(179, 167, 167, 167),
+        backgroundColor: const Color.fromARGB(179, 167, 167, 167),
         appBar: AppBar(
           title: const Text('Todo application'),
           backgroundColor: Colors.blueGrey[900],
@@ -28,13 +28,13 @@ class _HomeState extends State<Home> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: Row(
                       children: [
-                        Text('Todo List',
+                        const Text('Todo List',
                             style: TextStyle(
                               fontSize: 30,
                             )),
@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TodoAdd()));
+                                    builder: (context) => const TodoAdd()));
                         
                           },)
                       ],
@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: ListView(
                   shrinkWrap: true,
-                  children: [
+                  children: const [
                   TodoItem(),
                 ]),
               )

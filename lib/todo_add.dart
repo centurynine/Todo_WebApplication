@@ -38,7 +38,6 @@ class _TodoAddState extends State<TodoAdd> {
   void getDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? encodedList = prefs.getStringList('todo');
-    print(encodedList);
     if (encodedList != null) {
       List decodedList = encodedList.map((e) => json.decode(e)).toList();
       setState(() {
@@ -170,7 +169,6 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-        print(startDate);
       },
       child: const Text('Start date'),
     );
@@ -189,7 +187,6 @@ class _TodoAddState extends State<TodoAdd> {
             setState(() {
               endDate = value.toString();
             });
-            print(endDate);
           }
         });
       },
@@ -209,7 +206,6 @@ class _TodoAddState extends State<TodoAdd> {
               startTime = value.format(context);
             });
           }
-          print(startTime);
         });
       },
       child: const Text('Start time'),
@@ -227,7 +223,6 @@ class _TodoAddState extends State<TodoAdd> {
             setState(() {
               endTime = value.format(context);
             });
-            print(endTime);
           }
         });
       },

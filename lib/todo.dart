@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_application/storage/todo_storage.dart';
-
 import 'todo_edit.dart';
 
 class TodoItem extends StatefulWidget {
   const TodoItem({super.key});
-
   @override
   State<TodoItem> createState() => _TodoItemState();
 }
@@ -30,7 +27,6 @@ class _TodoItemState extends State<TodoItem> {
   void getDate() {
     SharedPreferences.getInstance().then((prefs) {
       List<String>? encodedList = prefs.getStringList('todo');
-      print(encodedList);
       if (encodedList != null) {
         List decodedList = encodedList.map((e) => json.decode(e)).toList();
         setState(() {
@@ -69,11 +65,11 @@ class _TodoItemState extends State<TodoItem> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                       child: ListTile(
-                        title: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(todoList[index].name,
-                                style: const TextStyle(fontSize: 20)
-                            ), 
+                                style: const TextStyle(fontSize: 20)),
                             Text(todoList[index].description),
                           ],
                         ),
@@ -81,7 +77,6 @@ class _TodoItemState extends State<TodoItem> {
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child: Row(
                             children: [
-                              
                               Container(
                                   decoration: BoxDecoration(
                                     color: const Color.fromARGB(
@@ -107,7 +102,7 @@ class _TodoItemState extends State<TodoItem> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                        'End date: ${todoList[index].endDate.toString().substring(0,10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
+                                        'End date: ${todoList[index].endDate.toString().substring(0, 10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
                                         style: const TextStyle(
                                             color: Colors.white)),
                                   )),
@@ -158,7 +153,6 @@ class _TodoItemState extends State<TodoItem> {
                                           ],
                                         );
                                       });
-                                 
                                 },
                               ),
                               IconButton(
@@ -182,7 +176,4 @@ class _TodoItemState extends State<TodoItem> {
             );
           });
   }
-
- 
-
 }
