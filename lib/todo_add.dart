@@ -32,6 +32,19 @@ class _TodoAddState extends State<TodoAdd> {
 
   void initSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    getDate();
+  }
+
+  void getDate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? encodedList = prefs.getStringList('todo');
+    print(encodedList);
+    if (encodedList != null) {
+      List decodedList = encodedList.map((e) => json.decode(e)).toList();
+      setState(() {
+        todoList = decodedList.map((e) => Todo.fromMap(e)).toList();
+      });
+    }
   }
 
   void saveData() async {
@@ -221,26 +234,73 @@ class _TodoAddState extends State<TodoAdd> {
     );
   }
 
-  ElevatedButton saveDate() {
-    return ElevatedButton(
-      onPressed: () {
-        if (name.isNotEmpty && description.isNotEmpty) {
+ElevatedButton saveDate() {
+  return ElevatedButton(
+    onPressed: () {
+      if (name.isNotEmpty && description.isNotEmpty && startDate.isNotEmpty && endDate.isNotEmpty && startTime.isNotEmpty && endTime.isNotEmpty) {
+        DateTime startDateTime = DateTime.parse(startDate).add(Duration(
+          hours: int.parse(startTime.split(":")[0]),
+          minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
+        ));
+        DateTime endDateTime = DateTime.parse(endDate).add(Duration(
+          hours: int.parse(endTime.split(":")[0]),
+          minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
+        ));
+        if (endDateTime.isBefore(startDateTime)) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Error"),
+                content: Text("End time cannot be before start time"),
+                actions: <Widget>[
+                  ElevatedButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
           Todo todo = Todo(
             id: todoList.length + 1,
             name: name,
             description: description,
-            startDate: DateTime.parse(startDate + startTime.trim()),
-            endDate: DateTime.parse(endDate + endTime),
+            startDate: startDateTime,
+            endDate: endDateTime,
           );
           todoList.add(todo);
           saveData();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const Home()));
+          Navigator.pop(context);
         }
-      },
-      child: const Text('Save'),
-    );
-  }
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text("Please fill in all fields"),
+              actions: <Widget>[
+                ElevatedButton(
+                  child: Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    },
+    child: const Text('Save'),
+  );
+}
+
+
 }
 
 TextFormField nameField() {
