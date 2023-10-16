@@ -10,7 +10,8 @@ class TodoItem extends StatefulWidget {
 }
 
 class _TodoItemState extends State<TodoItem> {
-  List<Todo> todoList = [
+   
+   List<Todo> todoList = [
     Todo(
         id: 1,
         name: 'Todo item 1',
@@ -26,10 +27,21 @@ class _TodoItemState extends State<TodoItem> {
         check: false),
   ];
 
+ 
   @override
-   
 
-  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
+  void loadData() async {
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+     setState(() {
+       
+     });
+  }
+
   Widget build(BuildContext context) {
     return todoList.isEmpty
         ? const Center(
