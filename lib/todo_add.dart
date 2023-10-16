@@ -28,7 +28,7 @@ class _TodoAddState extends State<TodoAdd> {
     getDate();
     super.initState();
   }
- 
+
   void getDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? encodedList = prefs.getStringList('todo');
@@ -288,7 +288,8 @@ class _TodoAddState extends State<TodoAdd> {
             hours: int.parse(endTime.split(":")[0]),
             minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
           ));
-          if (endDateTime.isBefore(startDateTime)) {
+          if (endDateTime.isBefore(startDateTime) ||
+              endDateTime == startDateTime) {
             showDialog(
               context: context,
               builder: (context) {

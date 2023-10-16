@@ -326,7 +326,7 @@ class _TodoEditState extends State<TodoEdit> {
             hours: int.parse(endTime.split(":")[0]),
             minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
           ));
-          if (endDateTime.isBefore(startDateTime)) {
+          if (endDateTime.isBefore(startDateTime) || endDateTime == startDateTime) {
             showDialog(
               context: context,
               builder: (context) {
