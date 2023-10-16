@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(179, 167, 167, 167),
+        backgroundColor: const Color.fromARGB(255, 26,31,35),
         appBar: AppBar(
           title: const Text('Todo Application'),
           backgroundColor: Colors.blueGrey[900],
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
                   Container(
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: Row(

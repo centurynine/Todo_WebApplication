@@ -12,6 +12,7 @@ class TodoItem extends StatefulWidget {
 
 class _TodoItemState extends State<TodoItem> {
   List<Todo> todoList = [];
+  Color checkColor = Colors.white;
 
   @override
   void initState() {
@@ -60,7 +61,7 @@ class _TodoItemState extends State<TodoItem> {
                     margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
@@ -68,8 +69,28 @@ class _TodoItemState extends State<TodoItem> {
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(todoList[index].name,
-                                style: const TextStyle(fontSize: 20)),
+                            todoList[index].check == true
+                                ? Row(
+                                    children: [
+                                      Text(todoList[index].name,
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              decoration:
+                                                  TextDecoration.lineThrough)),
+                                      const Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                        child: Text(
+                                          'Completed',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.green),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Text(todoList[index].name,
+                                    style: const TextStyle(fontSize: 20)),
                             Text(todoList[index].description),
                           ],
                         ),
@@ -112,6 +133,8 @@ class _TodoItemState extends State<TodoItem> {
                         leading: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child: Checkbox(
+                            activeColor: Colors.green,
+                            checkColor: Colors.white,
                             value: todoList[index].check,
                             onChanged: (bool? value) async {
                               setState(() {
