@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_application/storage/todo_storage.dart';
 
+import 'todo_edit.dart';
+
 class TodoItem extends StatefulWidget {
   const TodoItem({super.key});
 
@@ -115,7 +117,12 @@ class _TodoItemState extends State<TodoItem> {
                         ),
                         trailing: IconButton(
                           icon: const Icon(Icons.edit_note_rounded),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TodoEdit( todo: todoList[index])));
+                          },
                         ),
                       ),
                     ),
