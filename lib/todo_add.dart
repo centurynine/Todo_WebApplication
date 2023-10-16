@@ -163,6 +163,8 @@ class _TodoAddState extends State<TodoAdd> {
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Container(
+              width: 100,
+              height: 50,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
@@ -190,7 +192,12 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-      },
+      },    style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('Start date'),
     );
   }
@@ -210,7 +217,12 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-      },
+      },    style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('End date'),
     );
   }
@@ -228,28 +240,42 @@ class _TodoAddState extends State<TodoAdd> {
             });
           }
         });
-      },
+      },    style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('Start time'),
     );
   }
 
-  ElevatedButton endTimePick() {
-    return ElevatedButton(
-      onPressed: () {
-        showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.now(),
-        ).then((value) {
-          if (value != null) {
-            setState(() {
-              endTime = value.format(context);
-            });
-          }
-        });
-      },
-      child: const Text('End time'),
-    );
-  }
+ElevatedButton endTimePick() {
+  return ElevatedButton(
+    onPressed: () {
+      showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      ).then((value) {
+        if (value != null) {
+          setState(() {
+            endTime = value.format(context);
+          });
+        }
+      });
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
+    child: const Text(
+      'End time',
+    ),
+  );
+}
+
 
   ElevatedButton saveDate() {
     return ElevatedButton(
@@ -320,7 +346,12 @@ class _TodoAddState extends State<TodoAdd> {
             },
           );
         }
-      },
+      },    style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('Save'),
     );
   }

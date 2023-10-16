@@ -89,28 +89,30 @@ class _TodoItemState extends State<TodoItem> {
                                       ),
                                     ],
                                   )
-                                : todoList[index].endDate.isAfter(DateTime.now()) 
-                                ? Text(todoList[index].name,
-                                    style: const TextStyle(fontSize: 20))
+                                : todoList[index]
+                                        .endDate
+                                        .isAfter(DateTime.now())
+                                    ? Text(todoList[index].name,
+                                        style: const TextStyle(fontSize: 20))
                                     : Row(
-                                    children: [
-                                      Text(todoList[index].name,
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              decoration:
-                                                  TextDecoration.lineThrough)),
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                        child: Text(
-                                          'Expired',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.red),
-                                        ),
+                                        children: [
+                                          Text(todoList[index].name,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  decoration: TextDecoration
+                                                      .lineThrough)),
+                                          const Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                            child: Text(
+                                              'Expired',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.red),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
                             Text(todoList[index].description),
                           ],
                         ),
@@ -153,6 +155,9 @@ class _TodoItemState extends State<TodoItem> {
                         leading: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child: Checkbox(
+                           splashRadius: 20,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
                             activeColor: Colors.green,
                             checkColor: Colors.white,
                             value: todoList[index].check,

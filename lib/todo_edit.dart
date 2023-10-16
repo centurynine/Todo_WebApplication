@@ -181,6 +181,8 @@ class _TodoEditState extends State<TodoEdit> {
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Container(
+              width: 100,
+              height: 50,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
@@ -208,7 +210,12 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },
+      },style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('Start date'),
     );
   }
@@ -228,7 +235,12 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },
+      },style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('End date'),
     );
   }
@@ -251,7 +263,12 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },
+      },style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('Start time'),
     );
   }
@@ -279,7 +296,12 @@ class _TodoEditState extends State<TodoEdit> {
             });
           }
         });
-      },
+      },style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('End time'),
     );
   }
@@ -353,7 +375,12 @@ class _TodoEditState extends State<TodoEdit> {
             },
           );
         }
-      },
+      },style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 26, 31, 35), //  
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), //  
+      ),
+    ),
       child: const Text('Save'),
     );
   }

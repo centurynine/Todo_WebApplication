@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color.fromARGB(255, 26,31,35),
         appBar: AppBar(
           title: const Text('Todo Application'),
-          backgroundColor: Colors.blueGrey[900],
+          backgroundColor: Color.fromARGB(255, 43, 46, 48),
         ),
         
         body: Container(
