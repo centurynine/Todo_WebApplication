@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 26, 31, 35),
-      
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -23,11 +22,10 @@ class _HomeState extends State<Home> {
               Row(
                 children: [
                   Container(
-                 
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: Row(
                       children: [
-                       Text('Todo List',
+                        Text('Todo List',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,

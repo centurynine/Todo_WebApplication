@@ -100,7 +100,7 @@ class _TodoEditState extends State<TodoEdit> {
       ),
       body: Column(
         children: [
-            const SizedBox(
+          const SizedBox(
             height: 200,
           ),
           Padding(
@@ -255,7 +255,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 114, 199, 117),
+        backgroundColor: const Color.fromARGB(255, 114, 199, 117),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -288,7 +288,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 216, 121, 121),
+        backgroundColor: const Color.fromARGB(255, 216, 121, 121),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -321,7 +321,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 114, 199, 117),
+        backgroundColor: const Color.fromARGB(255, 114, 199, 117),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -354,7 +354,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 216, 121, 121),
+        backgroundColor: const Color.fromARGB(255, 216, 121, 121),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -446,7 +446,7 @@ class _TodoEditState extends State<TodoEdit> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

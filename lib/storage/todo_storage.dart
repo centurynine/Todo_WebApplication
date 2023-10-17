@@ -33,5 +33,4 @@ class Todo {
       'check': check,
     };
   }
-
 }

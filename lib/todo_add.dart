@@ -67,7 +67,7 @@ class _TodoAddState extends State<TodoAdd> {
           )),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 200,
           ),
           Padding(
@@ -187,9 +187,7 @@ class _TodoAddState extends State<TodoAdd> {
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.white)
-                       
-              ),
+                            color: Colors.white)),
               ),
             ],
           ),
@@ -227,7 +225,7 @@ class _TodoAddState extends State<TodoAdd> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 114, 199, 117), //
+        backgroundColor: const Color.fromARGB(255, 114, 199, 117), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -257,7 +255,7 @@ class _TodoAddState extends State<TodoAdd> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 216, 121, 121), //
+        backgroundColor: const Color.fromARGB(255, 216, 121, 121), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -287,7 +285,7 @@ class _TodoAddState extends State<TodoAdd> {
           });
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 114, 199, 117), //
+          backgroundColor: const Color.fromARGB(255, 114, 199, 117), //
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10), //
           ),
@@ -316,7 +314,7 @@ class _TodoAddState extends State<TodoAdd> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 216, 121, 121), //
+        backgroundColor: const Color.fromARGB(255, 216, 121, 121), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -401,7 +399,7 @@ class _TodoAddState extends State<TodoAdd> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255), //
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -434,7 +432,7 @@ class _TodoAddState extends State<TodoAdd> {
             fontFamily: GoogleFonts.kanit().fontFamily,
             fontSize: 15,
             color: Colors.black),
-        prefixIcon: Icon(Icons.tornado_rounded),
+        prefixIcon: const Icon(Icons.tornado_rounded),
         hintText: 'Name',
         hintStyle: TextStyle(
             fontFamily: GoogleFonts.kanit().fontFamily,
@@ -465,7 +463,7 @@ class _TodoAddState extends State<TodoAdd> {
             fontSize: 15,
             color: Colors.black,
           ),
-          prefixIcon: Icon(Icons.description_rounded),
+          prefixIcon: const Icon(Icons.description_rounded),
           hintText: 'Description',
           hintStyle: TextStyle(
               fontFamily: GoogleFonts.kanit().fontFamily,
