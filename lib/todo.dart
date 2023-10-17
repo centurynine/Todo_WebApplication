@@ -13,19 +13,20 @@ class TodoItem extends StatefulWidget {
 
 class _TodoItemState extends State<TodoItem> {
   final monthNames = {
-  1: 'January',
-  2: 'February',
-  3: 'March',
-  4: 'April',
-  5: 'May',
-  6: 'June',
-  7: 'July',
-  8: 'August',
-  9: 'September',
-  10: 'October',
-  11: 'November',
-  12: 'December',
-};
+    1: 'January',
+    2: 'February',
+    3: 'March',
+    4: 'April',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'August',
+    9: 'September',
+    10: 'October',
+    11: 'November',
+    12: 'December',
+  };
+
   List<Todo> todoList = [];
   Color checkColor = Colors.white;
 
@@ -34,7 +35,7 @@ class _TodoItemState extends State<TodoItem> {
     getDate();
     super.initState();
   }
- 
+
   void getDate() {
     SharedPreferences.getInstance().then((prefs) {
       List<String>? encodedList = prefs.getStringList('todo');
@@ -55,18 +56,21 @@ class _TodoItemState extends State<TodoItem> {
   }
 
   String formatDateTime(DateTime dateTime) {
-  final day = dateTime.day.toString().padLeft(2, '0');
-  final month = dateTime.month.toString().padLeft(2, '0');
-  final year = dateTime.year.toString();
-  return '$day $month $year';
-}
+    final day = dateTime.day.toString().padLeft(2, '0');
+    final month = dateTime.month;
+    final year = dateTime.year.toString();
+    return '$day ${monthNames[month]} $year';
+  }
 
   @override
   Widget build(BuildContext context) {
     return todoList.isEmpty
         ? Center(
             child: Text('No todo',
-                style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 20, color: Colors.white)),
+                style: TextStyle(
+                    fontFamily: GoogleFonts.kanit().fontFamily,
+                    fontSize: 20,
+                    color: Colors.white)),
           )
         : StreamBuilder(
             builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -91,7 +95,9 @@ class _TodoItemState extends State<TodoItem> {
                               ? Row(
                                   children: [
                                     Text(todoList[index].name,
-                                        style:  TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                        style: TextStyle(
+                                            fontFamily:
+                                                GoogleFonts.kanit().fontFamily,
                                             fontSize: 25,
                                             decoration:
                                                 TextDecoration.lineThrough)),
@@ -101,31 +107,37 @@ class _TodoItemState extends State<TodoItem> {
                                       child: Text(
                                         'Completed',
                                         style: TextStyle(
-                                          fontFamily: GoogleFonts.kanit().fontFamily,
+                                            fontFamily:
+                                                GoogleFonts.kanit().fontFamily,
                                             fontSize: 15,
                                             color: Colors.green),
                                       ),
                                     ),
                                   ],
                                 )
-                              : todoList[index]
-                                      .endDate
-                                      .isAfter(DateTime.now())
+                              : todoList[index].endDate.isAfter(DateTime.now())
                                   ? Text(todoList[index].name,
-                                      style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 25))
+                                      style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.kanit().fontFamily,
+                                          fontSize: 25))
                                   : Row(
                                       children: [
                                         Text(todoList[index].name,
-                                            style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                            style: TextStyle(
+                                                fontFamily: GoogleFonts.kanit()
+                                                    .fontFamily,
                                                 fontSize: 25,
                                                 decoration: TextDecoration
                                                     .lineThrough)),
-                                         Padding(
-                                          padding:
-                                              const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 0, 0, 0),
                                           child: Text(
                                             'Expired',
-                                            style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                            style: TextStyle(
+                                                fontFamily: GoogleFonts.kanit()
+                                                    .fontFamily,
                                                 fontSize: 15,
                                                 color: Colors.red),
                                           ),
@@ -133,7 +145,9 @@ class _TodoItemState extends State<TodoItem> {
                                       ],
                                     ),
                           Text(todoList[index].description,
-                              style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 20)),
+                              style: TextStyle(
+                                  fontFamily: GoogleFonts.kanit().fontFamily,
+                                  fontSize: 20)),
                         ],
                       ),
                       subtitle: Padding(
@@ -142,14 +156,16 @@ class _TodoItemState extends State<TodoItem> {
                           children: [
                             Container(
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 122, 219, 119),
+                                  color: Color.fromARGB(255, 90, 199, 86),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       'Start date: ${formatDateTime(todoList[index].startDate)} Time: ${todoList[index].startDate.toString().substring(11, 16)}',
-                                      style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                      style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.kanit().fontFamily,
                                           color: Colors.white)),
                                 )),
                             const SizedBox(
@@ -157,14 +173,16 @@ class _TodoItemState extends State<TodoItem> {
                             ),
                             Container(
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 235, 135, 135),
+                                  color: Color.fromARGB(255, 216, 121, 121),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                      'End date: ${todoList[index].endDate.toString().substring(0, 10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
-                                      style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                      'End date: ${formatDateTime(todoList[index].endDate)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
+                                      style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.kanit().fontFamily,
                                           color: Colors.white)),
                                 )),
                           ],
@@ -192,7 +210,8 @@ class _TodoItemState extends State<TodoItem> {
                         child: Row(
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.remove_circle_rounded),
+                              icon: const Icon(Icons.remove_circle_rounded,
+                                  color: Color.fromARGB(255, 221, 63, 57)),
                               onPressed: () {
                                 showDialog(
                                     context: context,
@@ -222,7 +241,10 @@ class _TodoItemState extends State<TodoItem> {
                               },
                             ),
                             IconButton(
-                              icon: const Icon(Icons.edit_note_rounded),
+                              icon: const Icon(
+                                Icons.edit_note_rounded,
+                                color: Color.fromARGB(255, 93, 148, 24),
+                              ),
                               onPressed: () {
                                 Navigator.push(
                                     context,

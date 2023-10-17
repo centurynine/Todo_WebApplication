@@ -100,7 +100,7 @@ class _TodoEditState extends State<TodoEdit> {
       ),
       body: Column(
         children: [
-            SizedBox(
+            const SizedBox(
             height: 200,
           ),
           Padding(
@@ -255,7 +255,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -288,7 +288,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -321,7 +321,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -354,7 +354,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -446,7 +446,7 @@ class _TodoEditState extends State<TodoEdit> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -484,7 +484,7 @@ class _TodoEditState extends State<TodoEdit> {
           fontSize: 15,
           fontFamily: GoogleFonts.kanit().fontFamily,
         ),
-        prefixIcon: Icon(Icons.tornado_rounded),
+        prefixIcon: const Icon(Icons.tornado_rounded),
         hintText: 'Name',
         hintStyle: TextStyle(
           fontFamily: GoogleFonts.kanit().fontFamily,
@@ -517,7 +517,7 @@ class _TodoEditState extends State<TodoEdit> {
           fontSize: 15,
           fontFamily: GoogleFonts.kanit().fontFamily,
         ),
-        prefixIcon: Icon(Icons.description_rounded),
+        prefixIcon: const Icon(Icons.description_rounded),
         hintText: 'Description',
         hintStyle: TextStyle(
           fontFamily: GoogleFonts.kanit().fontFamily,
