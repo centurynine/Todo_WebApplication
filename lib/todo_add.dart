@@ -50,7 +50,7 @@ class _TodoAddState extends State<TodoAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(179, 167, 167, 167),
+      backgroundColor: const Color.fromARGB(255, 26, 31, 35),
       appBar: AppBar(
           title: Text('Todo add',
               style: TextStyle(
@@ -109,12 +109,12 @@ class _TodoAddState extends State<TodoAdd> {
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.black))
+                            color: Colors.white))
                     : Text(startDate.toString().substring(0, 10),
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.black)),
+                            color: Colors.white)),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -132,12 +132,12 @@ class _TodoAddState extends State<TodoAdd> {
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.black))
+                            color: Colors.white))
                     : Text(startTime.toString(),
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.black)),
+                            color: Colors.white)),
               ),
             ],
           ),
@@ -160,12 +160,12 @@ class _TodoAddState extends State<TodoAdd> {
                           style: TextStyle(
                               fontFamily: GoogleFonts.kanit().fontFamily,
                               fontSize: 15,
-                              color: Colors.black))
+                              color: Colors.white))
                       : Text(endDate.toString().substring(0, 10),
                           style: TextStyle(
                               fontFamily: GoogleFonts.kanit().fontFamily,
                               fontSize: 15,
-                              color: Colors.black))),
+                              color: Colors.white))),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -182,12 +182,12 @@ class _TodoAddState extends State<TodoAdd> {
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.black))
+                            color: Colors.white))
                     : Text(endTime.toString(),
                         style: TextStyle(
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
-                            color: Colors.black)
+                            color: Colors.white)
                        
               ),
               ),
@@ -227,7 +227,7 @@ class _TodoAddState extends State<TodoAdd> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 114, 199, 117), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -257,7 +257,7 @@ class _TodoAddState extends State<TodoAdd> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 216, 121, 121), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -287,7 +287,7 @@ class _TodoAddState extends State<TodoAdd> {
           });
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+          backgroundColor: Color.fromARGB(255, 114, 199, 117), //
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10), //
           ),
@@ -316,7 +316,7 @@ class _TodoAddState extends State<TodoAdd> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 216, 121, 121), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -401,7 +401,7 @@ class _TodoAddState extends State<TodoAdd> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 255, 255, 255), //
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), //
         ),
@@ -410,7 +410,7 @@ class _TodoAddState extends State<TodoAdd> {
           style: TextStyle(
               fontFamily: GoogleFonts.kanit().fontFamily,
               fontSize: 20,
-              color: Colors.white)),
+              color: Colors.black)),
     );
   }
 

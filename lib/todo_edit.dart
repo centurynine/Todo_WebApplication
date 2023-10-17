@@ -79,7 +79,7 @@ class _TodoEditState extends State<TodoEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(179, 167, 167, 167),
+      backgroundColor: const Color.fromARGB(255, 26, 31, 35),
       appBar: AppBar(
         title: Text(
           'Todo edit',
@@ -143,7 +143,7 @@ class _TodoEditState extends State<TodoEdit> {
                         style: TextStyle(
                           fontFamily: GoogleFonts.kanit().fontFamily,
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       )
                     : const Text(''),
@@ -165,7 +165,7 @@ class _TodoEditState extends State<TodoEdit> {
                         style: TextStyle(
                           fontFamily: GoogleFonts.kanit().fontFamily,
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       )
                     : const Text(''),
@@ -192,7 +192,7 @@ class _TodoEditState extends State<TodoEdit> {
                         style: TextStyle(
                           fontFamily: GoogleFonts.kanit().fontFamily,
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       )
                     : const Text(''),
@@ -214,7 +214,7 @@ class _TodoEditState extends State<TodoEdit> {
                         style: TextStyle(
                           fontFamily: GoogleFonts.kanit().fontFamily,
                           fontSize: 15,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       )
                     : const Text(''),
@@ -255,7 +255,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: Color.fromARGB(255, 114, 199, 117),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -288,7 +288,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: Color.fromARGB(255, 216, 121, 121),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -321,7 +321,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: Color.fromARGB(255, 114, 199, 117),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -354,7 +354,7 @@ class _TodoEditState extends State<TodoEdit> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: Color.fromARGB(255, 216, 121, 121),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -446,7 +446,7 @@ class _TodoEditState extends State<TodoEdit> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 26, 31, 35),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -455,8 +455,8 @@ class _TodoEditState extends State<TodoEdit> {
         'Save',
         style: TextStyle(
           fontFamily: GoogleFonts.kanit().fontFamily,
-          fontSize: 15,
-          color: Colors.white,
+          fontSize: 25,
+          color: Colors.black,
         ),
       ),
     );
