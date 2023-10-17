@@ -62,6 +62,21 @@ class _TodoItemState extends State<TodoItem> {
     return '$day ${monthNames[month]} $year';
   }
 
+ String dateCompareDifferent(DateTime endDate) {
+  final now = DateTime.now();
+  final difference = endDate.difference(now);
+  final days = difference.inDays;
+  return days.toString();
+}
+
+ String hourCompareDifferent(DateTime endDate) {
+  final now = DateTime.now();
+  final difference = endDate.difference(now);
+  final hours = difference.inHours;
+  return hours.toString();
+}
+
+
   @override
   Widget build(BuildContext context) {
     return todoList.isEmpty
@@ -180,6 +195,27 @@ class _TodoItemState extends State<TodoItem> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                       'End date: ${formatDateTime(todoList[index].endDate)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
+                                      style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.kanit().fontFamily,
+                                          color: Colors.white)),
+                                )),                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 131, 201, 220),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: int.parse(dateCompareDifferent(todoList[index].endDate)) > 1 
+                                  ? Text('${dateCompareDifferent(todoList[index].endDate)} days left',
+                                      style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.kanit().fontFamily,
+                                          color: Colors.white))
+                                  : Text('${dateCompareDifferent(todoList[index].endDate)} day left',
                                       style: TextStyle(
                                           fontFamily:
                                               GoogleFonts.kanit().fontFamily,
