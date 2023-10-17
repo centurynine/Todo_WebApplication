@@ -271,7 +271,9 @@ class _TodoAddState extends State<TodoAdd> {
           ).then((value) {
             if (value != null) {
               setState(() {
-                startTime = value.format(context);
+                final hour = value.hour.toString().padLeft(2, '0');
+                final minute = value.minute.toString().padLeft(2, '0');
+                startTime = '$hour:$minute';
               });
             }
           });
@@ -298,7 +300,9 @@ class _TodoAddState extends State<TodoAdd> {
         ).then((value) {
           if (value != null) {
             setState(() {
-              endTime = value.format(context);
+              final hour = value.hour.toString().padLeft(2, '0');
+              final minute = value.minute.toString().padLeft(2, '0');
+              endTime = '$hour:$minute';
             });
           }
         });
@@ -453,7 +457,7 @@ class _TodoAddState extends State<TodoAdd> {
             fontSize: 15,
             color: Colors.black,
           ),
-          prefixIcon: Icon(Icons.tornado_rounded),
+          prefixIcon: Icon(Icons.description_rounded),
           hintText: 'Description',
           hintStyle: TextStyle(
               fontFamily: GoogleFonts.kanit().fontFamily,

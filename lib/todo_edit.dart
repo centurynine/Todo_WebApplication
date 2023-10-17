@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home.dart';
@@ -9,7 +10,7 @@ import 'storage/todo_storage.dart';
 class TodoEdit extends StatefulWidget {
   final Todo todo;
 
-  const TodoEdit({super.key, required this.todo});
+  const TodoEdit({Key? key, required this.todo}) : super(key: key);
 
   @override
   State<TodoEdit> createState() => _TodoEditState(todo: todo);
@@ -18,7 +19,6 @@ class TodoEdit extends StatefulWidget {
 class _TodoEditState extends State<TodoEdit> {
   Todo todo;
   _TodoEditState({required this.todo});
-  @override
   List<Todo> todoList = [];
   String name = '';
   String description = '';
@@ -39,14 +39,18 @@ class _TodoEditState extends State<TodoEdit> {
       endDate = todo.endDate.toString().substring(0, 10);
       startTime = todo.startDate.toString().substring(11, 16);
       endTime = todo.endDate.toString().substring(11, 16);
-      startTimeWidget = DateTime.parse(startDate).add(Duration(
-        hours: int.parse(startTime.split(":")[0]),
-        minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
-      ));
-      endTimeWidget = DateTime.parse(endDate).add(Duration(
-        hours: int.parse(endTime.split(":")[0]),
-        minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
-      ));
+      startTimeWidget = DateTime.parse(startDate).add(
+        Duration(
+          hours: int.parse(startTime.split(":")[0]),
+          minutes: int.parse(startTime.split(":")[1]),
+        ),
+      );
+      endTimeWidget = DateTime.parse(endDate).add(
+        Duration(
+          hours: int.parse(endTime.split(":")[0]),
+          minutes: int.parse(endTime.split(":")[1]),
+        ),
+      );
       check = todo.check;
     });
 
@@ -72,19 +76,28 @@ class _TodoEditState extends State<TodoEdit> {
     prefs.setStringList('todo', encodedList);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(179, 167, 167, 167),
       appBar: AppBar(
-          title: const Text('Todo edit'),
-          backgroundColor: Colors.blueGrey[900],
-          leading: IconButton(
-            iconSize: 50,
-            icon: const Icon(Icons.arrow_left_rounded),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )),
+        title: Text(
+          'Todo edit',
+          style: TextStyle(
+            fontFamily: GoogleFonts.kanit().fontFamily,
+            fontSize: 25,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blueGrey[900],
+        leading: IconButton(
+          iconSize: 50,
+          icon: const Icon(Icons.arrow_left_rounded),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -122,7 +135,14 @@ class _TodoEditState extends State<TodoEdit> {
               ),
               Container(
                 child: startDate.isNotEmpty
-                    ? Text(startDate.substring(0, 10))
+                    ? Text(
+                        startDate.substring(0, 10),
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.kanit().fontFamily,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      )
                     : const Text(''),
               ),
               Padding(
@@ -137,7 +157,14 @@ class _TodoEditState extends State<TodoEdit> {
               ),
               Container(
                 child: startTime.isNotEmpty
-                    ? Text(startTime.substring(0, 5))
+                    ? Text(
+                        startTime,
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.kanit().fontFamily,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      )
                     : const Text(''),
               ),
             ],
@@ -157,7 +184,14 @@ class _TodoEditState extends State<TodoEdit> {
               ),
               Container(
                 child: endDate.isNotEmpty
-                    ? Text(endDate.substring(0, 10))
+                    ? Text(
+                        endDate.substring(0, 10),
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.kanit().fontFamily,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      )
                     : const Text(''),
               ),
               Padding(
@@ -172,7 +206,14 @@ class _TodoEditState extends State<TodoEdit> {
               ),
               Container(
                 child: endTime.isNotEmpty
-                    ? Text(endTime.substring(0, 5))
+                    ? Text(
+                        endTime,
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.kanit().fontFamily,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      )
                     : const Text(''),
               ),
             ],
@@ -205,18 +246,25 @@ class _TodoEditState extends State<TodoEdit> {
         ).then((value) {
           if (value != null) {
             setState(() {
-              startDate = value.toString();
+              startDate = value.toString().substring(0, 10);
             });
           }
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), //
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Text('Start date'),
+      child: Text(
+        'Start date',
+        style: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 20,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -231,18 +279,25 @@ class _TodoEditState extends State<TodoEdit> {
         ).then((value) {
           if (value != null) {
             setState(() {
-              endDate = value.toString();
+              endDate = value.toString().substring(0, 10);
             });
           }
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), //
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Text('End date'),
+      child: Text(
+        'End date',
+        style: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 20,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -251,27 +306,31 @@ class _TodoEditState extends State<TodoEdit> {
       onPressed: () {
         showTimePicker(
           context: context,
-          initialTime: startTimeWidget.hour < 12
-              ? TimeOfDay(
-                  hour: startTimeWidget.hour, minute: startTimeWidget.minute)
-              : TimeOfDay(
-                  hour: startTimeWidget.hour - 12,
-                  minute: startTimeWidget.minute),
+          initialTime: TimeOfDay.fromDateTime(startTimeWidget),
         ).then((value) {
           if (value != null) {
             setState(() {
-              startTime = value.format(context);
+              final hour = value.hour.toString().padLeft(2, '0');
+              final minute = value.minute.toString().padLeft(2, '0');
+              startTime = '$hour:$minute';
             });
           }
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), //
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Text('Start time'),
+      child: Text(
+        'Start time',
+        style: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 20,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -279,33 +338,32 @@ class _TodoEditState extends State<TodoEdit> {
     return ElevatedButton(
       onPressed: () {
         showTimePicker(
-                context: context,
-                initialTime: startTimeWidget == endTimeWidget
-                    ? TimeOfDay(
-                        hour: startTimeWidget.hour + 1,
-                        minute: startTimeWidget.minute)
-                    : endTimeWidget.hour < 12
-                        ? TimeOfDay(
-                            hour: endTimeWidget.hour,
-                            minute: endTimeWidget.minute)
-                        : TimeOfDay(
-                            hour: endTimeWidget.hour - 12,
-                            minute: endTimeWidget.minute))
-            .then((value) {
+          context: context,
+          initialTime: TimeOfDay.fromDateTime(endTimeWidget),
+        ).then((value) {
           if (value != null) {
             setState(() {
-              endTime = value.format(context);
+              final hour = value.hour.toString().padLeft(2, '0');
+              final minute = value.minute.toString().padLeft(2, '0');
+              endTime = '$hour:$minute';
             });
           }
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), //
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Text('End time'),
+      child: Text(
+        'End time',
+        style: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 20,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -318,15 +376,20 @@ class _TodoEditState extends State<TodoEdit> {
             endDate.isNotEmpty &&
             startTime.isNotEmpty &&
             endTime.isNotEmpty) {
-          DateTime startDateTime = DateTime.parse(startDate).add(Duration(
-            hours: int.parse(startTime.split(":")[0]),
-            minutes: int.parse(startTime.split(":")[1].split(" ")[0]),
-          ));
-          DateTime endDateTime = DateTime.parse(endDate).add(Duration(
-            hours: int.parse(endTime.split(":")[0]),
-            minutes: int.parse(endTime.split(":")[1].split(" ")[0]),
-          ));
-          if (endDateTime.isBefore(startDateTime) || endDateTime == startDateTime) {
+          DateTime startDateTime = DateTime.parse(startDate).add(
+            Duration(
+              hours: int.parse(startTime.split(":")[0]),
+              minutes: int.parse(startTime.split(":")[1]),
+            ),
+          );
+          DateTime endDateTime = DateTime.parse(endDate).add(
+            Duration(
+              hours: int.parse(endTime.split(":")[0]),
+              minutes: int.parse(endTime.split(":")[1]),
+            ),
+          );
+          if (endDateTime.isBefore(startDateTime) ||
+              endDateTime.isAtSameMomentAs(startDateTime)) {
             showDialog(
               context: context,
               builder: (context) {
@@ -380,12 +443,19 @@ class _TodoEditState extends State<TodoEdit> {
         }
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+        backgroundColor: Color.fromARGB(255, 26, 31, 35),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), //
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Text('Save'),
+      child: Text(
+        'Save',
+        style: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 15,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -403,11 +473,21 @@ class _TodoEditState extends State<TodoEdit> {
       },
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
         labelText: 'Name',
+        labelStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 15,
+          fontFamily: GoogleFonts.kanit().fontFamily,
+        ),
         prefixIcon: Icon(Icons.tornado_rounded),
         hintText: 'Name',
+        hintStyle: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 15,
+          color: Colors.black,
+        ),
       ),
     );
   }
@@ -426,11 +506,21 @@ class _TodoEditState extends State<TodoEdit> {
       },
       maxLines: 5,
       keyboardType: TextInputType.multiline,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
         labelText: 'Description',
-        prefixIcon: Icon(Icons.tornado_rounded),
+        labelStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 15,
+          fontFamily: GoogleFonts.kanit().fontFamily,
+        ),
+        prefixIcon: Icon(Icons.description_rounded),
         hintText: 'Description',
+        hintStyle: TextStyle(
+          fontFamily: GoogleFonts.kanit().fontFamily,
+          fontSize: 15,
+          color: Colors.black,
+        ),
       ),
     );
   }
