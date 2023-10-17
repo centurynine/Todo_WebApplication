@@ -50,7 +50,10 @@ class _HomeState extends State<Home> {
               ),
               Expanded(
                 child: ListView(shrinkWrap: true, children: const [
-                  TodoItem(),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    child: TodoItem(),
+                  ),
                 ]),
               ),
               FloatingActionButton(

@@ -100,6 +100,9 @@ class _TodoEditState extends State<TodoEdit> {
       ),
       body: Column(
         children: [
+            SizedBox(
+            height: 200,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(300, 10, 300, 10),
             child: Container(

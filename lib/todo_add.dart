@@ -15,7 +15,6 @@ class TodoAdd extends StatefulWidget {
 
 class _TodoAddState extends State<TodoAdd> {
   TimeOfDay time = TimeOfDay.now();
-  @override
   List<Todo> todoList = [];
   String name = '';
   String description = '';
@@ -68,6 +67,9 @@ class _TodoAddState extends State<TodoAdd> {
           )),
       body: Column(
         children: [
+          SizedBox(
+            height: 200,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(300, 10, 300, 10),
             child: Container(
@@ -181,7 +183,13 @@ class _TodoAddState extends State<TodoAdd> {
                             fontFamily: GoogleFonts.kanit().fontFamily,
                             fontSize: 15,
                             color: Colors.black))
-                    : Text(endTime.toString()),
+                    : Text(endTime.toString(),
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.kanit().fontFamily,
+                            fontSize: 15,
+                            color: Colors.black)
+                       
+              ),
               ),
             ],
           ),

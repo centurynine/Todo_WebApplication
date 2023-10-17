@@ -12,6 +12,20 @@ class TodoItem extends StatefulWidget {
 }
 
 class _TodoItemState extends State<TodoItem> {
+  final monthNames = {
+  1: 'January',
+  2: 'February',
+  3: 'March',
+  4: 'April',
+  5: 'May',
+  6: 'June',
+  7: 'July',
+  8: 'August',
+  9: 'September',
+  10: 'October',
+  11: 'November',
+  12: 'December',
+};
   List<Todo> todoList = [];
   Color checkColor = Colors.white;
 
@@ -40,6 +54,13 @@ class _TodoItemState extends State<TodoItem> {
     prefs.setStringList('todo', encodedList);
   }
 
+  String formatDateTime(DateTime dateTime) {
+  final day = dateTime.day.toString().padLeft(2, '0');
+  final month = dateTime.month.toString().padLeft(2, '0');
+  final year = dateTime.year.toString();
+  return '$day $month $year';
+}
+
   @override
   Widget build(BuildContext context) {
     return todoList.isEmpty
@@ -49,177 +70,174 @@ class _TodoItemState extends State<TodoItem> {
           )
         : StreamBuilder(
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: todoList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                      child: ListTile(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            todoList[index].check == true
-                                ? Row(
-                                    children: [
-                                      Text(todoList[index].name,
-                                          style:  TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
-                                              fontSize: 25,
-                                              decoration:
-                                                  TextDecoration.lineThrough)),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                        child: Text(
-                                          'Completed',
-                                          style: TextStyle(
-                                            fontFamily: GoogleFonts.kanit().fontFamily,
-                                              fontSize: 15,
-                                              color: Colors.green),
-                                        ),
+            return ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: todoList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                    child: ListTile(
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          todoList[index].check == true
+                              ? Row(
+                                  children: [
+                                    Text(todoList[index].name,
+                                        style:  TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                            fontSize: 25,
+                                            decoration:
+                                                TextDecoration.lineThrough)),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                      child: Text(
+                                        'Completed',
+                                        style: TextStyle(
+                                          fontFamily: GoogleFonts.kanit().fontFamily,
+                                            fontSize: 15,
+                                            color: Colors.green),
                                       ),
-                                    ],
-                                  )
-                                : todoList[index]
-                                        .endDate
-                                        .isAfter(DateTime.now())
-                                    ? Text(todoList[index].name,
-                                        style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 25))
-                                    : Row(
-                                        children: [
-                                          Text(todoList[index].name,
-                                              style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
-                                                  fontSize: 25,
-                                                  decoration: TextDecoration
-                                                      .lineThrough)),
-                                           Padding(
-                                            padding:
-                                                const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                            child: Text(
-                                              'Expired',
-                                              style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
-                                                  fontSize: 15,
-                                                  color: Colors.red),
-                                            ),
+                                    ),
+                                  ],
+                                )
+                              : todoList[index]
+                                      .endDate
+                                      .isAfter(DateTime.now())
+                                  ? Text(todoList[index].name,
+                                      style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 25))
+                                  : Row(
+                                      children: [
+                                        Text(todoList[index].name,
+                                            style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                                fontSize: 25,
+                                                decoration: TextDecoration
+                                                    .lineThrough)),
+                                         Padding(
+                                          padding:
+                                              const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                          child: Text(
+                                            'Expired',
+                                            style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                                fontSize: 15,
+                                                color: Colors.red),
                                           ),
-                                        ],
-                                      ),
-                            Text(todoList[index].description,
-                                style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 20)),
+                                        ),
+                                      ],
+                                    ),
+                          Text(todoList[index].description,
+                              style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 20)),
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Row(
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 122, 219, 119),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      'Start date: ${formatDateTime(todoList[index].startDate)} Time: ${todoList[index].startDate.toString().substring(11, 16)}',
+                                      style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                          color: Colors.white)),
+                                )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 235, 135, 135),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      'End date: ${todoList[index].endDate.toString().substring(0, 10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
+                                      style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                          color: Colors.white)),
+                                )),
                           ],
                         ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Row(
-                            children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 152, 152, 152),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                        'Start date: ${todoList[index].startDate.toString().substring(0, 10)} Time: ${todoList[index].startDate.toString().substring(11, 16)}',
-                                        style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
-                                            color: Colors.white)),
-                                  )),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 152, 152, 152),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                        'End date: ${todoList[index].endDate.toString().substring(0, 10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
-                                        style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
-                                            color: Colors.white)),
-                                  )),
-                            ],
-                          ),
+                      ),
+                      leading: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Checkbox(
+                          splashRadius: 20,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          activeColor: Colors.green,
+                          checkColor: Colors.white,
+                          value: todoList[index].check,
+                          onChanged: (bool? value) async {
+                            setState(() {
+                              todoList[index].check = value ?? false;
+                            });
+                            await saveData();
+                          },
                         ),
-                        leading: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Checkbox(
-                            splashRadius: 20,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            activeColor: Colors.green,
-                            checkColor: Colors.white,
-                            value: todoList[index].check,
-                            onChanged: (bool? value) async {
-                              setState(() {
-                                todoList[index].check = value ?? false;
-                              });
-                              await saveData();
-                            },
-                          ),
-                        ),
-                        trailing: Container(
-                          width: 90,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove_circle_rounded),
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Text('Delete todo'),
-                                          content: const Text(
-                                              'Are you sure you want to delete this todo?'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text('Cancel')),
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                  setState(() {
-                                                    todoList.removeAt(index);
-                                                  });
-                                                  saveData();
-                                                },
-                                                child: const Text('Delete')),
-                                          ],
-                                        );
-                                      });
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.edit_note_rounded),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              TodoEdit(todo: todoList[index])));
-                                },
-                              ),
-                            ],
-                          ),
+                      ),
+                      trailing: Container(
+                        width: 90,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove_circle_rounded),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Delete todo'),
+                                        content: const Text(
+                                            'Are you sure you want to delete this todo?'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('Cancel')),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                setState(() {
+                                                  todoList.removeAt(index);
+                                                });
+                                                saveData();
+                                              },
+                                              child: const Text('Delete')),
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.edit_note_rounded),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            TodoEdit(todo: todoList[index])));
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             );
           });
   }
