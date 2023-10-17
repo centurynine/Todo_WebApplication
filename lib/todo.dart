@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_application/storage/todo_storage.dart';
 import 'todo_edit.dart';
@@ -16,15 +17,10 @@ class _TodoItemState extends State<TodoItem> {
 
   @override
   void initState() {
-    initSharedPreferences();
+    getDate();
     super.initState();
   }
-
-  void initSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    getDate();
-  }
-
+ 
   void getDate() {
     SharedPreferences.getInstance().then((prefs) {
       List<String>? encodedList = prefs.getStringList('todo');
@@ -47,8 +43,9 @@ class _TodoItemState extends State<TodoItem> {
   @override
   Widget build(BuildContext context) {
     return todoList.isEmpty
-        ? const Center(
-            child: Text('No todo items'),
+        ? Center(
+            child: Text('No todo',
+                style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 20, color: Colors.white)),
           )
         : StreamBuilder(
             builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -73,16 +70,17 @@ class _TodoItemState extends State<TodoItem> {
                                 ? Row(
                                     children: [
                                       Text(todoList[index].name,
-                                          style: const TextStyle(
-                                              fontSize: 20,
+                                          style:  TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                              fontSize: 25,
                                               decoration:
                                                   TextDecoration.lineThrough)),
-                                      const Padding(
+                                      Padding(
                                         padding:
-                                            EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                            const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                         child: Text(
                                           'Completed',
                                           style: TextStyle(
+                                            fontFamily: GoogleFonts.kanit().fontFamily,
                                               fontSize: 15,
                                               color: Colors.green),
                                         ),
@@ -93,27 +91,28 @@ class _TodoItemState extends State<TodoItem> {
                                         .endDate
                                         .isAfter(DateTime.now())
                                     ? Text(todoList[index].name,
-                                        style: const TextStyle(fontSize: 20))
+                                        style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 25))
                                     : Row(
                                         children: [
                                           Text(todoList[index].name,
-                                              style: const TextStyle(
-                                                  fontSize: 20,
+                                              style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
+                                                  fontSize: 25,
                                                   decoration: TextDecoration
                                                       .lineThrough)),
-                                          const Padding(
+                                           Padding(
                                             padding:
-                                                EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                                const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                             child: Text(
                                               'Expired',
-                                              style: TextStyle(
+                                              style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
                                                   fontSize: 15,
                                                   color: Colors.red),
                                             ),
                                           ),
                                         ],
                                       ),
-                            Text(todoList[index].description),
+                            Text(todoList[index].description,
+                                style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,fontSize: 20)),
                           ],
                         ),
                         subtitle: Padding(
@@ -130,7 +129,7 @@ class _TodoItemState extends State<TodoItem> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                         'Start date: ${todoList[index].startDate.toString().substring(0, 10)} Time: ${todoList[index].startDate.toString().substring(11, 16)}',
-                                        style: const TextStyle(
+                                        style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
                                             color: Colors.white)),
                                   )),
                               const SizedBox(
@@ -146,7 +145,7 @@ class _TodoItemState extends State<TodoItem> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                         'End date: ${todoList[index].endDate.toString().substring(0, 10)} Time: ${todoList[index].endDate.toString().substring(11, 16)}',
-                                        style: const TextStyle(
+                                        style: TextStyle(fontFamily: GoogleFonts.kanit().fontFamily,
                                             color: Colors.white)),
                                   )),
                             ],
@@ -155,7 +154,7 @@ class _TodoItemState extends State<TodoItem> {
                         leading: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child: Checkbox(
-                           splashRadius: 20,
+                            splashRadius: 20,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                             activeColor: Colors.green,

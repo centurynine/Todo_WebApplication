@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 import 'storage/todo_storage.dart';
@@ -52,7 +53,11 @@ class _TodoAddState extends State<TodoAdd> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(179, 167, 167, 167),
       appBar: AppBar(
-          title: const Text('Todo add'),
+          title: Text('Todo add',
+              style: TextStyle(
+                  fontFamily: GoogleFonts.kanit().fontFamily,
+                  fontSize: 20,
+                  color: Colors.white)),
           backgroundColor: Colors.blueGrey[900],
           leading: IconButton(
             iconSize: 50,
@@ -98,8 +103,16 @@ class _TodoAddState extends State<TodoAdd> {
               ),
               Container(
                 child: startDate == ''
-                    ? const Text('#Date')
-                    : Text(startDate.toString().substring(0, 10)),
+                    ? Text('#Date',
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.kanit().fontFamily,
+                            fontSize: 15,
+                            color: Colors.black))
+                    : Text(startDate.toString().substring(0, 10),
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.kanit().fontFamily,
+                            fontSize: 15,
+                            color: Colors.black)),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -113,8 +126,16 @@ class _TodoAddState extends State<TodoAdd> {
               ),
               Container(
                 child: startTime == ''
-                    ? const Text('#Time')
-                    : Text(startTime.toString()),
+                    ? Text('#Time',
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.kanit().fontFamily,
+                            fontSize: 15,
+                            color: Colors.black))
+                    : Text(startTime.toString(),
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.kanit().fontFamily,
+                            fontSize: 15,
+                            color: Colors.black)),
               ),
             ],
           ),
@@ -133,8 +154,16 @@ class _TodoAddState extends State<TodoAdd> {
               ),
               Container(
                   child: endDate == ''
-                      ? const Text('#Date')
-                      : Text(endDate.toString().substring(0, 10))),
+                      ? Text('#Date',
+                          style: TextStyle(
+                              fontFamily: GoogleFonts.kanit().fontFamily,
+                              fontSize: 15,
+                              color: Colors.black))
+                      : Text(endDate.toString().substring(0, 10),
+                          style: TextStyle(
+                              fontFamily: GoogleFonts.kanit().fontFamily,
+                              fontSize: 15,
+                              color: Colors.black))),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Container(
@@ -147,7 +176,11 @@ class _TodoAddState extends State<TodoAdd> {
               ),
               Container(
                 child: endTime == ''
-                    ? const Text('#Time')
+                    ? Text('#Time',
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.kanit().fontFamily,
+                            fontSize: 15,
+                            color: Colors.black))
                     : Text(endTime.toString()),
               ),
             ],
@@ -191,7 +224,11 @@ class _TodoAddState extends State<TodoAdd> {
           borderRadius: BorderRadius.circular(10), //
         ),
       ),
-      child: const Text('Start date'),
+      child: Text('Start date',
+          style: TextStyle(
+              fontFamily: GoogleFonts.kanit().fontFamily,
+              fontSize: 20,
+              color: Colors.white)),
     );
   }
 
@@ -217,32 +254,39 @@ class _TodoAddState extends State<TodoAdd> {
           borderRadius: BorderRadius.circular(10), //
         ),
       ),
-      child: const Text('End date'),
+      child: Text('End date',
+          style: TextStyle(
+              fontFamily: GoogleFonts.kanit().fontFamily,
+              fontSize: 20,
+              color: Colors.white)),
     );
   }
 
   ElevatedButton startTimePick() {
     return ElevatedButton(
-      onPressed: () {
-        showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.now(),
-        ).then((value) {
-          if (value != null) {
-            setState(() {
-              startTime = value.format(context);
-            });
-          }
-        });
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 26, 31, 35), //
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), //
+        onPressed: () {
+          showTimePicker(
+            context: context,
+            initialTime: TimeOfDay.now(),
+          ).then((value) {
+            if (value != null) {
+              setState(() {
+                startTime = value.format(context);
+              });
+            }
+          });
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromARGB(255, 26, 31, 35), //
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10), //
+          ),
         ),
-      ),
-      child: const Text('Start time'),
-    );
+        child: Text('Start time',
+            style: TextStyle(
+                fontFamily: GoogleFonts.kanit().fontFamily,
+                fontSize: 20,
+                color: Colors.white)));
   }
 
   ElevatedButton endTimePick() {
@@ -265,9 +309,11 @@ class _TodoAddState extends State<TodoAdd> {
           borderRadius: BorderRadius.circular(10), //
         ),
       ),
-      child: const Text(
-        'End time',
-      ),
+      child: Text('End time',
+          style: TextStyle(
+              fontFamily: GoogleFonts.kanit().fontFamily,
+              fontSize: 20,
+              color: Colors.white)),
     );
   }
 
@@ -348,7 +394,11 @@ class _TodoAddState extends State<TodoAdd> {
           borderRadius: BorderRadius.circular(10), //
         ),
       ),
-      child: const Text('Save'),
+      child: Text('Save',
+          style: TextStyle(
+              fontFamily: GoogleFonts.kanit().fontFamily,
+              fontSize: 20,
+              color: Colors.white)),
     );
   }
 
@@ -365,11 +415,19 @@ class _TodoAddState extends State<TodoAdd> {
       },
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
         labelText: 'Name',
+        labelStyle: TextStyle(
+            fontFamily: GoogleFonts.kanit().fontFamily,
+            fontSize: 15,
+            color: Colors.black),
         prefixIcon: Icon(Icons.tornado_rounded),
         hintText: 'Name',
+        hintStyle: TextStyle(
+            fontFamily: GoogleFonts.kanit().fontFamily,
+            fontSize: 15,
+            color: Colors.black),
       ),
     );
   }
@@ -387,12 +445,20 @@ class _TodoAddState extends State<TodoAdd> {
       },
       maxLines: 5,
       keyboardType: TextInputType.multiline,
-      decoration: const InputDecoration(
-        border: InputBorder.none,
-        labelText: 'Description',
-        prefixIcon: Icon(Icons.tornado_rounded),
-        hintText: 'Description',
-      ),
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          labelText: 'Description',
+          labelStyle: TextStyle(
+            fontFamily: GoogleFonts.kanit().fontFamily,
+            fontSize: 15,
+            color: Colors.black,
+          ),
+          prefixIcon: Icon(Icons.tornado_rounded),
+          hintText: 'Description',
+          hintStyle: TextStyle(
+              fontFamily: GoogleFonts.kanit().fontFamily,
+              fontSize: 15,
+              color: Colors.black)),
     );
   }
 }
