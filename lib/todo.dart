@@ -75,7 +75,7 @@ class _TodoItemState extends State<TodoItem> {
         return 'Expired';
       }
     }
-    return '$hours';
+    return '$hours hours left';
   }
 
   String dateCompareDifferent(DateTime endDate, bool check) {
@@ -187,11 +187,12 @@ class _TodoItemState extends State<TodoItem> {
                       subtitle: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                         child: Row(
+                          
                           children: [
                             Container(
                                 decoration: BoxDecoration(
                                   color: const Color.fromARGB(255, 90, 199, 86),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -209,7 +210,7 @@ class _TodoItemState extends State<TodoItem> {
                                 decoration: BoxDecoration(
                                   color:
                                       const Color.fromARGB(255, 216, 121, 121),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -227,7 +228,7 @@ class _TodoItemState extends State<TodoItem> {
                                 decoration: BoxDecoration(
                                   color:
                                       const Color.fromARGB(255, 131, 201, 220),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Padding(
                                     padding: const EdgeInsets.all(8.0),
