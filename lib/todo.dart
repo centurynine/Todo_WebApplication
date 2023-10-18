@@ -75,7 +75,7 @@ class _TodoItemState extends State<TodoItem> {
         return 'Expired';
       }
     }
-    return hours.toString() + '';
+    return '$hours';
   }
 
   String dateCompareDifferent(DateTime endDate, bool check) {
@@ -87,14 +87,13 @@ class _TodoItemState extends State<TodoItem> {
         return hourCompareDifferent(endDate);
       } else if (days == 1) {
         return '$days day left';
-      }  else if (days > 1) {
+      } else if (days > 1) {
         return '$days days left';
-      }else if (days < 0) {
+      } else if (days < 0) {
         return 'Expired';
       }
-    
     }
-    return "Nice work!";
+    return 'Nice work!';
   }
 
   @override
@@ -244,7 +243,7 @@ class _TodoItemState extends State<TodoItem> {
                         ),
                       ),
                       leading: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                         child: Checkbox(
                           splashRadius: 20,
                           shape: RoundedRectangleBorder(
@@ -261,6 +260,7 @@ class _TodoItemState extends State<TodoItem> {
                         ),
                       ),
                       trailing: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                         width: 90,
                         child: Row(
                           children: [
@@ -268,31 +268,7 @@ class _TodoItemState extends State<TodoItem> {
                               icon: const Icon(Icons.remove_circle_rounded,
                                   color: Color.fromARGB(255, 221, 63, 57)),
                               onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Delete todo'),
-                                        content: const Text(
-                                            'Are you sure you want to delete this todo?'),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text('Cancel')),
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                                setState(() {
-                                                  todoList.removeAt(index);
-                                                });
-                                                saveData();
-                                              },
-                                              child: const Text('Delete')),
-                                        ],
-                                      );
-                                    });
+                                removeConfirm(context, index);
                               },
                             ),
                             IconButton(
@@ -317,5 +293,47 @@ class _TodoItemState extends State<TodoItem> {
               },
             );
           });
+  }
+
+  Future<dynamic> removeConfirm(BuildContext context, int index) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Delete todo',style: TextStyle(
+                        fontFamily: GoogleFonts.kanit().fontFamily,
+                        fontSize: 25,
+                        color: Colors.black87)),
+            content: Text('Are you sure you want to delete this todo?',style: TextStyle(
+                        fontFamily: GoogleFonts.kanit().fontFamily,
+                        fontSize: 20,
+                        color: Colors.black87)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: TextButton.styleFrom(foregroundColor: const Color.fromARGB(255, 54, 190, 244)),
+                child: Text('Cancel',
+                    style: TextStyle(
+                        fontFamily: GoogleFonts.kanit().fontFamily,
+                        fontSize: 17,
+                        color: Colors.black87)),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      todoList.removeAt(index);
+                    });
+                    saveData();
+                  }, style: TextButton.styleFrom(foregroundColor: const Color.fromARGB(255, 244, 54, 63)),
+                  child: Text('Delete',style: TextStyle(
+                        fontFamily: GoogleFonts.kanit().fontFamily,
+                        fontSize: 17,
+                        color: Colors.red)),),
+            ],
+          );
+        });
   }
 }
