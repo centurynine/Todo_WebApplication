@@ -68,9 +68,9 @@ class _TodoItemState extends State<TodoItem> {
     final minutes = difference.inMinutes;
     if (hours <= 0) {
       if (minutes > 1 && minutes < 60) {
-        return '$minutes Minutes left';
+        return '$minutes minutes left';
       } else if (minutes == 1) {
-        return '$minutes Minute left';
+        return '$minutes minute left';
       } else if (minutes <= 0) {
         return 'Expired';
       }
@@ -103,7 +103,7 @@ class _TodoItemState extends State<TodoItem> {
             child: Text('No todo',
                 style: TextStyle(
                     fontFamily: GoogleFonts.kanit().fontFamily,
-                    fontSize: 20,
+                    fontSize: 30,
                     color: Colors.white)),
           )
         : StreamBuilder(
