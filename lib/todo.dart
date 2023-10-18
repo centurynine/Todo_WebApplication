@@ -36,16 +36,15 @@ class _TodoItemState extends State<TodoItem> {
     super.initState();
   }
 
-  void getDate() {
-    SharedPreferences.getInstance().then((prefs) {
-      List<String>? encodedList = prefs.getStringList('todo');
-      if (encodedList != null) {
-        List decodedList = encodedList.map((e) => json.decode(e)).toList();
-        setState(() {
-          todoList = decodedList.map((e) => Todo.fromMap(e)).toList();
-        });
-      }
-    });
+  void getDate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? encodedList = prefs.getStringList('todo');
+    if (encodedList != null) {
+      List decodedList = encodedList.map((e) => json.decode(e)).toList();
+      setState(() {
+        todoList = decodedList.map((e) => Todo.fromMap(e)).toList();
+      });
+    }
   }
 
   Future saveData() async {
@@ -62,11 +61,40 @@ class _TodoItemState extends State<TodoItem> {
     return '$day ${monthNames[month]} $year';
   }
 
-  String dateCompareDifferent(DateTime endDate) {
+  String hourCompareDifferent(DateTime endDate) {
+    final now = DateTime.now();
+    final difference = endDate.difference(now);
+    final hours = difference.inHours;
+    final minutes = difference.inMinutes;
+    if (hours <= 0) {
+      if (minutes > 1 && minutes < 60) {
+        return '$minutes Minutes left';
+      } else if (minutes == 1) {
+        return '$minutes Minute left';
+      } else if (minutes <= 0) {
+        return 'Expired';
+      }
+    }
+    return hours.toString() + '';
+  }
+
+  String dateCompareDifferent(DateTime endDate, bool check) {
     final now = DateTime.now();
     final difference = endDate.difference(now);
     final days = difference.inDays;
-    return days.toString();
+    if (check == false) {
+      if (days == 0) {
+        return hourCompareDifferent(endDate);
+      } else if (days == 1) {
+        return '$days day left';
+      }  else if (days > 1) {
+        return '$days days left';
+      }else if (days < 0) {
+        return 'Expired';
+      }
+    
+    }
+    return "Nice work!";
   }
 
   @override
@@ -203,23 +231,15 @@ class _TodoItemState extends State<TodoItem> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: int.parse(dateCompareDifferent(
-                                              todoList[index].endDate)) >
-                                          1
-                                      ? Text(
-                                          '${dateCompareDifferent(todoList[index].endDate)} days left',
-                                          style: TextStyle(
-                                              fontFamily: GoogleFonts.kanit()
-                                                  .fontFamily,
-                                              color: Colors.white))
-                                      : Text(
-                                          '${dateCompareDifferent(todoList[index].endDate)} day left',
-                                          style: TextStyle(
-                                              fontFamily: GoogleFonts.kanit()
-                                                  .fontFamily,
-                                              color: Colors.white)),
-                                )),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                        dateCompareDifferent(
+                                            todoList[index].endDate,
+                                            todoList[index].check),
+                                        style: TextStyle(
+                                            fontFamily:
+                                                GoogleFonts.kanit().fontFamily,
+                                            color: Colors.white)))),
                           ],
                         ),
                       ),
