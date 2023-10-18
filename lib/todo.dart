@@ -186,8 +186,9 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                       subtitle: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                        child: Row(
-                          
+                        child: Wrap(
+                          runAlignment: WrapAlignment.center,
+                          runSpacing: 5,
                           children: [
                             Container(
                                 decoration: BoxDecoration(
